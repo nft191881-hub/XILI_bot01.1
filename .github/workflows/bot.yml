@@ -3,21 +3,18 @@ name: My Free Bot
 on:
   workflow_dispatch:
 
-permissions:
-  models: read
-
 jobs:
   run-bot:
     runs-on: ubuntu-latest
     steps:
-      - name: Call GitHub Models
+      - name: Call SiliconFlow API
         run: |
-          echo "正在通过 GitHub 官方白嫖大脑..."
-          curl https://models.inference.ai.azure.com/chat/completions \
+          echo "正在唤醒机器人..."
+          curl https://api.siliconflow.cn/v1/chat/completions \
             -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: Bearer ${{ secrets.DEEPSEEK_API_KEY }}" \
             -d '{
-                  "model": "gpt-4o-mini",
+                  "model": "Qwen/Qwen2.5-7B-Instruct",
                   "messages": [
                     {"role": "system", "content": "你是一个测试成功的机器人。"},
                     {"role": "user", "content": "请回复：主人你好，我已经成功接入你的免费大脑了！"}
