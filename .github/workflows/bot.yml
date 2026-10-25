@@ -1,22 +1,8 @@
-name: My Free Bot
-
-on:
-  workflow_dispatch:
-
+name: Bot
+on: workflow_dispatch
 jobs:
-  run-bot:
+  run:
     runs-on: ubuntu-latest
     steps:
-      - name: Call OpenRouter API
-        run: |
-          echo "正在唤醒机器人..."
-          curl https://openrouter.ai/api/v1/chat/completions \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ secrets.DEEPSEEK_API_KEY }}" \
-            -d '{
-                  "model": "meta-llama/llama-3.1-8b-instruct:free",
-                  "messages": [
-                    {"role": "system", "content": "你是一个测试成功的机器人。"},
-                    {"role": "user", "content": "请回复：主人你好，我已经成功接入你的免费大脑了！"}
-                  ]
-                }'
+      - run: |
+          curl https://openrouter.ai/api/v1/chat/completions -H "Content-Type: application/json" -H "Authorization: Bearer ${{ secrets.DEEPSEEK_API_KEY }}" -d '{"model": "qwen/qwen-2.5-7b-instruct:free", "messages": [{"role": "user", "content": "请回复：主人你好，我已经成功接入你的免费大脑了！"}]}'
